@@ -76,11 +76,26 @@ await marcas.deleteOne(
 // CONSULTA 1:
 // Obtener la cantidad vendida de prendas para una fecha específica.
 
-const ventasPorFecha = await ventas.find({
-  fecha: "2025-06-12"
-}).toArray();
+// CONSULTA 1:
+// Obtener la cantidad vendida de prendas para una fecha específica.
 
-console.log("Ventas del 2025-06-12:");
+const ventasPorFecha = await ventas.aggregate([
+  {
+    $match: {
+      fecha: "2025-06-12"
+    }
+  },
+  {
+    $group: {
+      _id: "$prenda",
+      cantidadVendida: {
+        $sum: "$cantidad"
+      }
+    }
+  }
+]).toArray();
+
+console.log("Cantidad vendida por prenda el 2025-06-12:");
 console.log(ventasPorFecha);
 
 // CONSULTA 2:
@@ -94,15 +109,30 @@ console.log(marcasConVentas);
 // CONSULTA 3:
 // Obtener las prendas vendidas y su cantidad restante en stock.
 
+// CONSULTA 3:
+// Obtener las prendas vendidas y su cantidad restante en stock.
+
 const prendasVendidas = await prendas.find().toArray();
 
-console.log("Prendas y stock disponible:");
+console.log("Prendas y stock restante:");
 
-prendasVendidas.forEach(prenda => {
-  console.log(
-    `${prenda.nombre} - Stock disponible: ${prenda.stock}`
+for (const prenda of prendasVendidas) {
+
+  const ventasPrenda = await ventas.find({
+    prenda: prenda.nombre
+  }).toArray();
+
+  const cantidadVendida = ventasPrenda.reduce(
+    (total, venta) => total + venta.cantidad,
+    0
   );
-});
+
+  const stockRestante = prenda.stock - cantidadVendida;
+
+  console.log(
+    `${prenda.nombre} - Vendidas: ${cantidadVendida} - Stock restante: ${stockRestante}`
+  );
+}
 
 // CONSULTA 4:
 // Obtener las 5 marcas más vendidas y la cantidad total vendida.
