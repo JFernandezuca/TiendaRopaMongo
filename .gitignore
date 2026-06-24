@@ -1,1 +1,99 @@
 node_modules/
+
+
+# =========================
+# Sistema Operativo
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Logs
+# =========================
+*.log
+logs/
+
+# =========================
+# Variables de entorno
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Archivos temporales
+# =========================
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.eggs/
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+
+# =========================
+# Node.js
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dist/
+build/
+
+# =========================
+# Visual Studio Code
+# =========================
+.vscode/
+
+# =========================
+# JetBrains (PyCharm, IntelliJ)
+# =========================
+.idea/
+
+# =========================
+# Visual Studio
+# =========================
+.vs/
+bin/
+obj/
+
+# =========================
+# Archivos de base de datos
+# =========================
+*.db
+*.sqlite
+*.sqlite3
+
+# =========================
+# Archivos comprimidos
+# =========================
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+
+# =========================
+# Jupyter
+# =========================
+.ipynb_checkpoints/
+
+# =========================
+# Archivos de configuración local
+# =========================
+*.local
